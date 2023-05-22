@@ -20,6 +20,7 @@ class ExpressApp {
     this.app.set("layout", "layouts/layout");
     this.app.use(expressLayouts);
     this.app.use(express.static("public"));
+    this.app.use(express.static(__dirname + "/public"));
     this.app.set("views", path.join(__dirname, "views"));
   }
 
