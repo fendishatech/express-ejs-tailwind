@@ -12,12 +12,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET /blog-posts/new
+// GET /new
 router.get("/new", (req, res) => {
   res.render("blogs/new");
 });
 
-// GET /blog-posts/:id
+// GET /:id
 router.get("/:id", async (req, res) => {
   try {
     const blog = await BlogPost.findByPk(req.params.id);
@@ -32,29 +32,30 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// POST /blog-posts
+// POST /
 router.post("/", async (req, res) => {
   try {
     const { title, content } = req.body;
     console.log(req.body);
     console.log(`Title : ${title}`);
     console.log(`Content : ${content}`);
-    const blogPost = await BlogPost.create({ title, content });
-    res.redirect(`/${blogPost.id}`);
+    const blog = await BlogPost.create({ title, content });
+    res.render("blogs/show", { blog });
+    // res.redirect(`/${blogPost.id}`);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-// GET /blog-posts/:id/edit
+// GET /:id/edit
 router.get("/:id/edit", async (req, res) => {
   try {
-    const blogPost = await BlogPost.findByPk(req.params.id);
-    if (!blogPost) {
+    const blog = await BlogPost.findByPk(req.params.id);
+    if (!blog) {
       res.status(404).send("Blog Post Not Found");
     } else {
-      res.render("blog-posts/edit", { blogPost });
+      res.render("blogs/edit", { blog });
     }
   } catch (error) {
     console.error(error);
@@ -62,7 +63,7 @@ router.get("/:id/edit", async (req, res) => {
   }
 });
 
-// PUT /blog-posts/:id
+// PUT /:id
 router.put("/:id", async (req, res) => {
   try {
     const { title, content } = req.body;
