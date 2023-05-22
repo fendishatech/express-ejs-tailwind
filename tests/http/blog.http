@@ -1,0 +1,25 @@
+@baseUrl = http://localhost:3333
+
+### CREATE
+POST {{baseUrl}}/
+Content-Type: application/json
+
+{
+  "title": "Awesome Title",
+  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+}
+
+### READ
+GET {{baseUrl}}
+
+### UPDATE
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+  "title": "Updated Blog Post",
+  "content": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+}
+
+### DELETE
+DELETE {{baseUrl}}/blog-posts/1
