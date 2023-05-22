@@ -1,5 +1,8 @@
+require("dotenv").config();
+const path = require("path");
 const express = require("express");
-const authRouter = require("./routes/auth.router");
+const expressLayouts = require("express-ejs-layouts");
+const blogRouter = require("./routes/blog.router");
 
 class ExpressApp {
   constructor(port) {
@@ -10,11 +13,13 @@ class ExpressApp {
 
   setupMiddleware() {
     this.app.set("view engine", "ejs");
+    this.app.set(expressLayouts);
     this.app.use(express.static("public"));
+    this.app.set("views", path.join(__dirname, "views"));
   }
 
   setupRoutes() {
-    this.app.use("", authRouter);
+    this.app.use("", blogRouter);
   }
 
   startServer(port) {
