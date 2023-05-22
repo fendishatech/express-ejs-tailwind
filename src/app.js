@@ -14,9 +14,11 @@ class ExpressApp {
 
   setupMiddleware() {
     this.app.use(express.json());
-    this.app.set("view engine", "ejs");
     this.app.use(methodOverride("_method"));
-    this.app.set(expressLayouts);
+    this.app.set("view engine", "ejs");
+    this.app.set("views", __dirname + "/src/views");
+    this.app.set("layout", "layouts/layout");
+    this.app.use(expressLayouts);
     this.app.use(express.static("public"));
     this.app.set("views", path.join(__dirname, "views"));
   }

@@ -36,12 +36,8 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { title, content } = req.body;
-    console.log(req.body);
-    console.log(`Title : ${title}`);
-    console.log(`Content : ${content}`);
     const blog = await BlogPost.create({ title, content });
-    res.render("blogs/show", { blog });
-    // res.redirect(`/${blogPost.id}`);
+    return res.redirect(`/${blog.id}`);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -83,11 +79,11 @@ router.put("/:id", async (req, res) => {
 // DELETE /blog-posts/:id
 router.delete("/:id", async (req, res) => {
   try {
-    const blogPost = await BlogPost.findByPk(req.params.id);
-    if (!blogPost) {
+    const blog = await BlogPost.findByPk(req.params.id);
+    if (!blog) {
       res.status(404).send("Blog Post Not Found");
     } else {
-      await blogPost.destroy();
+      await blog.destroy();
       res.redirect("/blog-posts");
     }
   } catch (error) {

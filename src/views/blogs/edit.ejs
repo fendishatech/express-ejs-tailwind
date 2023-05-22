@@ -1,49 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- ... -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  </head>
-  <body>
-    <h1>Edit Blog Post</h1>
-    <form>
-      <input id="blogId" name="blogId" value="<%= blog.id %>" hidden />
-      <div>
-        <label for="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value="<%= blog.title %>"
-          required
-        />
-      </div>
-      <div>
-        <label for="content">Content:</label>
-        <textarea id="content" name="content" required>
+<h1>Edit Blog Post</h1>
+<form>
+  <input id="blogId" name="blogId" value="<%= blog.id %>" hidden />
+  <div>
+    <label for="title">Title:</label>
+    <input
+      type="text"
+      id="title"
+      name="title"
+      value="<%= blog.title %>"
+      required
+    />
+  </div>
+  <div>
+    <label for="content">Content:</label>
+    <textarea id="content" name="content" required>
 <%= blog.content %></textarea
-        >
-      </div>
-      <button type="submit">Update Blog Post</button>
-    </form>
-    <a href="/">Back to All Blogs</a>
+    >
+  </div>
+  <button type="submit">Update Blog Post</button>
+</form>
+<a href="/">Back to All Blogs</a>
 
-    <script>
-      // Submit form data to Express endpoint using axios
-      document.querySelector("form").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const blogId = document.querySelector("#blogId").value;
-        try {
-          const response = await axios.put(`/${blogId}`, {
-            title: document.querySelector("#title").value,
-            content: document.querySelector("#content").value,
-          });
-          console.log(response);
-          console.log(response.data);
-        } catch (error) {
-          console.log(error);
-        }
+<script>
+  // Submit form data to Express endpoint using axios
+  document.querySelector("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const blogId = document.querySelector("#blogId").value;
+    try {
+      const response = await axios.put(`/${blogId}`, {
+        title: document.querySelector("#title").value,
+        content: document.querySelector("#content").value,
       });
-    </script>
-  </body>
-</html>
+      console.log(response);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+</script>
