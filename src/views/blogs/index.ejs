@@ -11,12 +11,8 @@
     <ul>
       <% blogs.forEach((blog) => { %>
       <li>
-        <a href="/blog-posts/<%= blog.id %>"><%= blog.title %></a>
-        <form
-          action="/blog-posts/<%= blog.id %>"
-          method="POST"
-          style="display: inline"
-        >
+        <a href="/<%= blog.id %>"><%= blog.title %></a>
+        <form action="/<%= blog.id %>" method="POST" style="display: inline">
           <input type="hidden" name="_method" value="DELETE" />
           <button type="submit">Delete</button>
         </form>
