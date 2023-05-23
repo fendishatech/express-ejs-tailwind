@@ -1,28 +1,6 @@
 <h1>New Blog Post</h1>
-<form>
-  <div>
-    <label for="title">Title:</label>
-    <input type="text" id="title" name="title" required />
-  </div>
-  <div>
-    <label for="content">Content:</label>
-    <textarea id="content" name="content" required></textarea>
-  </div>
+<form action="/" method="POST">
+  <%- include('./partials/_blog_form_fields.ejs') %>
   <button type="submit">Create Blog Post</button>
 </form>
 <a href="/">Back to All Blogs</a>
-
-<script>
-  // Submit form data to Express endpoint using axios
-  document.querySelector("form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post("/", {
-        title: document.querySelector("#title").value,
-        content: document.querySelector("#content").value,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  });
-</script>
