@@ -4,11 +4,11 @@
   "description": "A basic express full stack app template with ejs engine and tailwind css",
   "main": "server.js",
   "scripts": {
-    "dev": "concurrently nodemon server.js",
-    "start": "node server.js",
-    "build-css":"postcss public/css/main.css -o public/css/main.min.css --watch",
-    "watch:tailwind": "npx tailwindcss build public/css/tailwind.css -o public/css/main.css --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "devCon" : "concurrently \" npm run watch:tailwind\" \" npm run dev\" \" npm run browser:sync ",
+    "dev": "nodemon --watch \"./src/views/ --exec server.js",
+    "watch:tailwind":"postcss public/css/main.css -o public/css/main.min.css --watch",
+    "browser:sync" : "browser-sync start --proxy \"localhost:3333\" --files \"public/**/*.*\" \"./src/views/**/*.*\" --watch",
+    "start": "node server.js"
   },
   "keywords": [
     "ejs",
