@@ -2,11 +2,9 @@
 <ul>
   <% blogs.forEach((blog) => { %>
   <li>
+    <p>Id : <%= blog.id %></p>
     <a href="/<%= blog.id %>"><%= blog.title %></a>
-    <form action="/<%= blog.id %>" method="POST" style="display: inline">
-      <input type="hidden" name="_method" value="DELETE" />
-      <button type="submit">Delete</button>
-    </form>
+    <%- include ('./partials/_delete_form.ejs', { url : `/${blog.id}` }) %>
   </li>
   <% }); %>
 </ul>

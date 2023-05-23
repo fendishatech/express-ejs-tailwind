@@ -37,6 +37,7 @@ router.post("/", async (req, res) => {
   try {
     const { title, content } = req.body;
     const blog = await BlogPost.create({ title, content });
+    console.log("Blog id :", blog.id);
     return res.redirect(`/${blog.id}`);
   } catch (error) {
     console.error(error);
@@ -78,13 +79,15 @@ router.put("/:id", async (req, res) => {
 
 // DELETE /blog-posts/:id
 router.delete("/:id", async (req, res) => {
+  console.log("Id :", req.params.id);
   try {
     const blog = await BlogPost.findByPk(req.params.id);
+    console.log("Blog :", blog);
     if (!blog) {
       res.status(404).send("Blog Post Not Found");
     } else {
       await blog.destroy();
-      res.redirect("/blog-posts");
+      res.redirect("/");
     }
   } catch (error) {
     console.error(error);
