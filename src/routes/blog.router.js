@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 
 // GET /new
 router.get("/new", (req, res) => {
-  res.render("blogs/new");
+  res.render("blogs/new", { blog: new BlogPost() });
 });
 
 // GET /:id
@@ -72,12 +72,8 @@ router.put("/:id", async (req, res) => {
     if (!blog) {
       res.status(404).send("Blog Post Not Found");
     } else {
-      // const updatedBlog = await blog.update({ title, content });
-      console.log(blog.id);
-      console.log("Title :", title);
-      console.log("Content :", content);
-
-      // res.redirect(`/`);
+      const updatedBlog = await blog.update({ title, content });
+      res.redirect(`/`);
     }
   } catch (error) {
     console.error(error);

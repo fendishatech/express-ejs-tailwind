@@ -1,6 +1,7 @@
 require("dotenv").config();
 const path = require("path");
 const express = require("express");
+const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const expressLayouts = require("express-ejs-layouts");
 const blogRouter = require("./routes/blog.router");
@@ -18,6 +19,7 @@ class ExpressApp {
     this.app.set("layout", "layouts/layout");
     this.app.use(expressLayouts);
     this.app.use(express.static("public")); // Serve static files first
+    this.app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
     this.app.use(express.json()); // Parse JSON request bodies
     this.app.use(methodOverride("_method"));
   }
